@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import { List } from 'react-native-paper';
 import styles from "../../styles/Styles";
 
-//
-type propsType = {
-    listItems: Array<string>,
-    value: string, 
-    text: string,
-    iconCb: string,
-    iconCbListItem: string
-    setValue: (data:string)=>void,
+interface Props {
+    listItems: string[];
+    value: string;
+    text: string;
+    iconCb: string;
+    iconCbListItem: string;
+    setValue: (data: string) => void;
 }
-const ComboBox = ({ listItems, value, setValue, text, iconCb, iconCbListItem }:propsType) => {
 
-    const [expanded, setExpanded] = useState(false);
+const ComboBox: React.FC<Props> = ({
+    listItems,
+    value,
+    setValue,
+    text,
+    iconCb,
+    iconCbListItem
+}) => {
+    const [expanded, setExpanded] = React.useState(false);
+
     const handlePress = () => setExpanded(!expanded);
 
     return (
@@ -25,19 +32,20 @@ const ComboBox = ({ listItems, value, setValue, text, iconCb, iconCbListItem }:p
                 left={props => <List.Icon {...props} icon={iconCb} />}
                 expanded={expanded}
                 style={[styles.bgLight]}
-                onPress={handlePress}>
+                onPress={handlePress}
+            >
                 {
-                    listItems?.map((item:any, i:any) => {
-                        return <List.Item
+                    listItems?.map((item, i) => (
+                        <List.Item
                             key={i}
                             title={item}
                             left={props => <List.Icon {...props} icon={iconCbListItem} />}
                             onPress={() => {
                                 setValue(item);
                                 setExpanded(!expanded);
-                            }} />
-                    })
-                }
+                            }}
+                        />
+                    ))}
             </List.Accordion>
         </View>
     );

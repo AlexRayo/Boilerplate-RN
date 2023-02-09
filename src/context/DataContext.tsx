@@ -2,16 +2,18 @@ import React, { createContext, useState } from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { primaryColor, warningColor } from '../styles/Styles';
 
+import registerData from '../controllers/register';
 import { ResRegister, formParams } from '../types/types';
 
-import registerData from '../controllers/register';
-
-export interface RegisterProviderProps {
+interface RegisterProviderProps {
     register: ResRegister,
     setRegister: (data: ResRegister) => void,
     submitRegister: (data: formParams) => void,
     loadRegister: () => void
 }
+
+/***********************/
+
 const INITIAL_STATE = {
     register: [],
     setRegister: () => 0,
@@ -37,7 +39,7 @@ const theme = {
 
 export const DataContext = createContext<RegisterProviderProps>(INITIAL_STATE);
 
-export const DataProvider = ({ children }: any): JSX.Element => {
+export const DataProvider = ({ children }: {children: React.ReactNode}): JSX.Element => {
     const { saveRegister, fetchLocalRegister } = registerData()
 
     const [register, setRegister] = useState<ResRegister>([])
@@ -47,7 +49,6 @@ export const DataProvider = ({ children }: any): JSX.Element => {
             .then((resRegister) => {
                 //console.log(`Response register: ${JSON.stringify(resRegister)}`);
                 setRegister(resRegister)
-                //loadRegister()
             })
     }
 

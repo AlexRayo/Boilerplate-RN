@@ -2,7 +2,7 @@ import {useState} from 'react';
 
 const ClientsData = () => {
     const [client, setClient] = useState({});//Single client object
-    const [clients, setClients] = useState<any[]>([]);    
+    const [clients, setClients] = useState<Object[]>([]);    
     const [clientData, setClientData] = useState([]);
 
     const fetchClients = async () => {
