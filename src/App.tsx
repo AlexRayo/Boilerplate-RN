@@ -8,13 +8,13 @@ import Navigation from './navigation/Navigation'
 import linking from "./utils/linking"
 
 function App() {
-    return (
-        <DataProvider>
-            <NavigationContainer linking={linking}>
-                <Navigation/>
-            </NavigationContainer>
-        </DataProvider>
-    );
+	return (
+		<DataProvider>
+			<NavigationContainer linking={linking}>
+				<Navigation />
+			</NavigationContainer>
+		</DataProvider>
+	);
 }
 
 export default App;
